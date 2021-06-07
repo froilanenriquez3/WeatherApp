@@ -1,6 +1,6 @@
 API: https://www.el-tiempo.net/api
 
-- choose province
+- choose province 
 - choose city in a province
 - search by city name
 - show weather forecast and basic data:

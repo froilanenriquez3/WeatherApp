@@ -1,0 +1,31 @@
+*{
+    margin: 0px;
+    padding: 0px;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    border: solid black 3px;
+}
+
+main > section {
+    width: 20%;
+}
+
+section {
+    border: solid black 3px;
+    margin: 3%;
+    padding: 3%;
+}
+
+article {
+    margin: 3%;
+    padding: 3%;
+}
+
+
+
+#municipioInfo{
+    display: none;
+}
