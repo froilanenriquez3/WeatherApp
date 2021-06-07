@@ -1,22 +1,27 @@
+var Provinces = [];
+
 init();
 
-function init() {}
+function init() {
+  getProvinces();
+}
+
+/* API Functions */
 
 function getProvinces() {
-  let provinces = [];
   axios
     .get("https://www.el-tiempo.net/api/json/v1/provincias")
     .then((res) => {
       res.data.forEach((item) => {
-        provinces.push(item);
+        Provinces.push(item);
       });
-      console.log(provinces);
+      console.log(Provinces);
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
-      return provinces;
+      fillProvinceList(Provinces);
     });
 }
 
@@ -37,7 +42,7 @@ function getProvinceInfo(codprov) {
 }
 
 function getProvinceMunicipios(codprov) {
-  let province;
+  let provMunicipios = [];
   axios
     .get(
       "https://www.el-tiempo.net/api/json/v1/provincias/" +
@@ -46,13 +51,23 @@ function getProvinceMunicipios(codprov) {
     )
     .then((res) => {
       console.log(res);
-      province = res.data;
+
+      //JSON returns both arrays and objects, checks to see which one response is
+      if (Array.isArray(res.data)) {
+        res.data.forEach((item) => {
+          provMunicipios.push(item);
+        });
+      } else {
+        Object.values(res.data).forEach((item) => {
+          provMunicipios.push(item);
+        });
+      }
     })
     .catch((err) => {
       console.log(err);
     })
     .finally(() => {
-      return province;
+      seeMunicipiosProvince(provMunicipios);
     });
 }
 
@@ -76,4 +91,43 @@ function getMunicipioInfo(codprov, id) {
     .finally(() => {
       return municipio;
     });
+}
+
+/* Functions */
+
+function fillProvinceList(provinces) {
+  let list = document.getElementById("provinceList");
+
+  provinces.forEach((province) => {
+    let li = document.createElement("li");
+
+    li.innerHTML = province.NOMBRE_PROVINCIA;
+    li.id = "province" + province.CODPROV;
+    li.dataset.id = province.CODPROV;
+    li.addEventListener("click", () => {
+      getProvinceMunicipios(province.CODPROV);
+    });
+
+    list.appendChild(li);
+  });
+}
+
+function seeMunicipiosProvince(municipios) {
+  console.log(municipios);
+  let provinceEl = document.getElementById("province" + municipios[0].CODPROV);
+
+  //Reset list
+  provinceEl.innerHTML = municipios[0].NOMBRE_PROVINCIA;
+
+  let ul = document.createElement("ul");
+  ul.id = "province" + municipios[0].CODPROV + "List";
+
+  municipios.forEach((municipio) => {
+    let li = document.createElement("li");
+
+    li.innerHTML = municipio.NOMBRE;
+    ul.appendChild(li);
+  });
+
+  provinceEl.appendChild(ul);
 }
