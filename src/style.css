@@ -16,7 +16,7 @@ main > section {
 section {
     border: solid black 3px;
     margin: 3%;
-    padding: 3%;
+    padding: 1%;
 }
 
 article {
@@ -24,6 +24,9 @@ article {
     padding: 3%;
 }
 
+ul {
+    list-style: none;
+}
 
 
 #municipioInfo{

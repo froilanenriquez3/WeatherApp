@@ -4,6 +4,9 @@ var Municipios = [];
 init();
 
 function init() {
+  document.getElementById("btnAbc").addEventListener("click", sortAlphabeticalProvinces);
+
+
   getProvinces();
   getMunicipios();
 }
@@ -146,14 +149,11 @@ function fillProvinceList(provinces) {
   });
 }
 
-function seeMunicipiosProvince(municipios) {
-  let header = document.getElementById("provinceInfoHeader");
-  header.innerHTML = municipios[0].NOMBRE_PROVINCIA;
+function fillMunList(municipios){
   let municipioUl = document.getElementById("provinceMunicipiosList");
 
   municipioUl.innerHTML = "";
-
-  municipios.forEach((municipio, i) => {
+   municipios.forEach((municipio, i) => {
     let li = document.createElement("li");
     let id = cleanIdMunicipio(municipio.CODIGOINE);
 
@@ -167,6 +167,17 @@ function seeMunicipiosProvince(municipios) {
   });
 }
 
+function seeMunicipiosProvince(municipios) {
+
+  document.getElementById("btnAbcMun").addEventListener("click",() => { sortAlphabeticalMun(municipios)});
+
+  let header = document.getElementById("provinceInfoHeader");
+  header.innerHTML = municipios[0].NOMBRE_PROVINCIA;
+
+  fillMunList(municipios);
+
+}
+
 function seeInfoMunicipio(municipio) {
   let header = document.getElementById("munHeader");
   header.innerHTML = municipio.municipio.NOMBRE;
@@ -178,6 +189,8 @@ function seeInfoMunicipio(municipio) {
     "Poblacion: " + municipio.municipio.POBLACION_MUNI;
   document.getElementById("munSuperficie").innerHTML =
     "Superficie: " + municipio.municipio.SUPERFICIE;
+    document.getElementById("munPerimetro").innerHTML =
+    "Perimetro: " + municipio.municipio.PERIMETRO;
 
   //Tiempo
   document.getElementById("munFecha").innerHTML = "Fecha: " + municipio.fecha;
@@ -188,6 +201,12 @@ function seeInfoMunicipio(municipio) {
     "Max: " + municipio.temperaturas.max;
   document.getElementById("munTempMin").innerHTML =
     "Min: " + municipio.temperaturas.min;
+    document.getElementById("munHumedad").innerHTML =
+    "Humedad: " + municipio.humedad;
+    document.getElementById("munViento").innerHTML =
+    "Viento: " + municipio.viento;
+    document.getElementById("munLluvia").innerHTML =
+    "Lluvia: " + municipio.lluvia;
 }
 
 //Get request doesnt accept extra 0s
@@ -221,4 +240,29 @@ function seeInfoProvince(province) {
   document.getElementById("provTomorrow").innerHTML =
     "Tomorrow: " + province.tomorrow.p;
 
+}
+
+
+
+
+function sortAlphabeticalProvinces(){
+  let ul = document.getElementById("provinceList");
+  ul.innerHTML = "";
+
+  Provinces.sort((a, b) => a.NOMBRE_PROVINCIA.localeCompare(b.NOMBRE_PROVINCIA));
+
+  fillProvinceList(Provinces);
+
+}
+
+function sortAlphabeticalMun(municipios){
+  let ul = document.getElementById("provinceMunicipiosList");
+  ul.innerHTML = "";
+
+  console.log("Sorting municipios");
+
+  municipios.sort((a, b) => a.NOMBRE_PROVINCIA.localeCompare(b.NOMBRE_PROVINCIA));
+  //  municipios.reverse();
+
+  fillMunList(municipios);
 }
