@@ -6,11 +6,12 @@
 main {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     border: solid black 3px;
 }
 
 main > section {
-    width: 20%;
+    width: 22%;
 }
 
 section {

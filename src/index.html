@@ -21,42 +21,42 @@
 
     <main>
       <section>
-
+        <h2>Province List</h2>
         <button id="btnAbc">Alphabetical</button>
         <button>Poblacio</button>
-
-        <h2>Province List</h2>
         <ul id="provinceList"></ul>
-
       </section>
 
       <section id="provinceMunicipios">
+        <h2 id="provinceInfoHeader">Select a province to see cities</h2>
         <button id="btnAbcMun">Alphabetical</button>
         <button>Poblacio</button>
-        <h2 id="provinceInfoHeader">Select a province to see cities</h2>
         <ul id="provinceMunicipiosList"></ul>
       </section>
 
       <section id="municipioInfo">
-        <h2 id="munHeader">Select a city to see info</h2>
+        <button id="btnPdf">Download PDF</button>
+        <div id="munDiv">
+          <h2 id="munHeader">Select a city to see info</h2>
 
-        <article id="munDatos">
-          <p id="munCapital"></p>
-          <p id="munPoblacion"></p>
-          <p id="munSuperficie"></p>
-          <p id="munPerimetro"></p>
-        </article>
+          <article id="munDatos">
+            <p id="munCapital"></p>
+            <p id="munPoblacion"></p>
+            <p id="munSuperficie"></p>
+            <p id="munPerimetro"></p>
+          </article>
 
-        <article id="munTiempo">
-          <p id="munFecha"></p>
-          <p id="munSky"></p>
-          <p id="munTempActual"></p>
-          <p id="munTempMin"></p>
-          <p id="munTempMax"></p>
-          <p id="munHumedad"></p>
-          <p id="munViento"></p>
-          <p id="munLluvia"></p>
-        </article>
+          <article id="munTiempo">
+            <p id="munFecha"></p>
+            <p id="munSky"></p>
+            <p id="munTempActual"></p>
+            <p id="munTempMin"></p>
+            <p id="munTempMax"></p>
+            <p id="munHumedad"></p>
+            <p id="munViento"></p>
+            <p id="munLluvia"></p>
+          </article>
+        </div>
       </section>
 
       <section id="provinceInfo">
@@ -77,6 +77,9 @@
 
     <!-- AXIOS  -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+
+    <!-- HTML2PDF -->
+    <script src="html2pdf.bundle.min.js"></script>
 
     <script src="scripts/main.js" type="module"></script>
   </body>
