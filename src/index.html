@@ -8,11 +8,12 @@
     <title>Weather App</title>
   </head>
   <body>
-    <header>
-      <h1>El Tiempo</h1>
+    <header >
+      <h1>Froilan's Weather App</h1>
 
-      <label for="searchBar">Search</label>
-      <input type="text" id="searchBar" />
+      <div>
+        <button id="btnDark">Dark mode</button>
+      </div>
     </header>
 
     <aside>
@@ -20,21 +21,39 @@
     </aside>
 
     <main>
-      <section>
-        <h2>Province List</h2>
-        <button id="btnAbc">Alphabetical</button>
-        <button>Poblacio</button>
+      <section class="mainSection">
+        <div class="sectionHeader">
+          <h2>Provinces</h2>
+          <button id="btnAbc">Alphabetical</button>
+          <button>Poblacio</button>
+          <div id="searchProv">
+            <button id="btnSearchProv">Search</button>
+            <input type="text" id="searchBarProv" />
+          </div>
+          <p id="provResults"></p>
+        </div>
+
         <ul id="provinceList"></ul>
       </section>
 
-      <section id="provinceMunicipios">
-        <h2 id="provinceInfoHeader">Select a province to see cities</h2>
-        <button id="btnAbcMun">Alphabetical</button>
-        <button>Poblacio</button>
-        <ul id="provinceMunicipiosList"></ul>
+      <section id="provinceMunicipios" class="mainSection">
+        <div class="sectionHeader">
+          <h2 id="provinceInfoHeader">Cities</h2>
+          <button id="btnAbcMun">Alphabetical</button>
+          <button>Poblacio</button>
+
+          <div id="searchMun">
+            <button id="btnSearchMun">Search</button>
+            <input type="text" id="searchBarMun" />
+          </div>
+          <p id="munResults"></p>
+        </div>
+
+        <ul id="provinceMunicipiosList">
+        </ul>
       </section>
 
-      <section id="municipioInfo">
+      <section id="municipioInfo" class="mainSection">
         <button id="btnPdf">Download PDF</button>
         <div id="munDiv">
           <h2 id="munHeader">Select a city to see info</h2>
@@ -59,8 +78,9 @@
         </div>
       </section>
 
-      <section id="provinceInfo">
-        <h2 id="provHeader">Select a province to see info</h2>
+      <section id="provinceInfo" class="mainSection">
+        <h2 id="provHeader">Info</h2>
+        <p>Select a province or city to see info</p>
         <article id="provDatos">
           <p id="provCapital"></p>
           <p id="provCom"></p>

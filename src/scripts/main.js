@@ -1,5 +1,6 @@
 var Provinces = [];
 var Municipios = [];
+var Mode = "light";
 
 init();
 
@@ -8,6 +9,13 @@ function init() {
     .getElementById("btnAbc")
     .addEventListener("click", sortAlphabeticalProvinces);
   document.getElementById("btnPdf").addEventListener("click", generatePdf);
+
+  document
+    .getElementById("btnSearchProv")
+    .addEventListener("click", searchProv);
+  document.getElementById("btnSearchMun").addEventListener("click", searchMun);
+
+  document.getElementById("btnDark").addEventListener("click", turnOffTheLights);
 
   getProvinces();
   getMunicipios();
@@ -45,7 +53,9 @@ function getMunicipios() {
     .catch((err) => {
       console.log(err);
     })
-    .finally(() => {});
+    .finally(() => {
+      fillMunList(Municipios);
+    });
 }
 
 function getProvinceInfo(codprov) {
@@ -131,6 +141,7 @@ function getMunicipioInfo(codprov, id) {
 
 function fillProvinceList(provinces) {
   let list = document.getElementById("provinceList");
+  list.innerHTML = "";
 
   provinces.forEach((province) => {
     let li = document.createElement("li");
@@ -149,6 +160,9 @@ function fillProvinceList(provinces) {
 
     list.appendChild(li);
   });
+
+  document.getElementById("provResults").innerHTML =
+    provinces.length + " results";
 }
 
 function fillMunList(municipios) {
@@ -167,6 +181,9 @@ function fillMunList(municipios) {
     });
     municipioUl.appendChild(li);
   });
+
+  document.getElementById("munResults").innerHTML =
+    municipios.length + " results";
 }
 
 function seeMunicipiosProvince(municipios) {
@@ -175,7 +192,7 @@ function seeMunicipiosProvince(municipios) {
   });
 
   let header = document.getElementById("provinceInfoHeader");
-  header.innerHTML = municipios[0].NOMBRE_PROVINCIA;
+  header.innerHTML = "Cities of " + municipios[0].NOMBRE_PROVINCIA;
 
   fillMunList(municipios);
 }
@@ -228,7 +245,6 @@ function cleanIdMunicipio(id) {
 }
 
 function seeInfoProvince(province) {
-  console.log(province);
   let header = document.getElementById("provHeader");
   header.innerHTML = province.title;
 
@@ -275,4 +291,70 @@ function generatePdf() {
   const name = document.getElementById("munHeader").innerHTML;
 
   html2pdf().from(el).save(name);
+}
+
+function searchProv() {
+  let name = document.getElementById("searchBarProv").value;
+
+  let filteredProvs = Provinces.filter((province) =>
+    province.NOMBRE_PROVINCIA.toLowerCase().includes(name.toLowerCase())
+  );
+
+  fillProvinceList(filteredProvs);
+}
+
+function searchMun() {
+  let name = document.getElementById("searchBarMun").value;
+
+  let filteredMuns = Municipios.filter((municipio) =>
+    municipio.NOMBRE.toLowerCase().includes(name.toLowerCase())
+  );
+
+  fillMunList(filteredMuns);
+}
+
+function turnOffTheLights() {
+  if (Mode == "light") {
+    let body = document.getElementsByTagName("body");
+    body[0].style.backgroundImage = 'url("../img/night.jpg")';
+
+
+    let headers = document.getElementsByTagName("header");
+    headers[0].style.backgroundColor = "MidnightBlue";
+    headers[0].style.color = "white";
+
+    let sections = Array.from(document.getElementsByTagName("section"));
+
+    sections.map((section) => {
+      section.style.backgroundColor = "MidnightBlue";
+      section.style.color = "white";
+
+      return section;
+    });
+
+    let btn = document.getElementById("btnDark");
+    btn.innerHTML = "Light mode";
+    Mode = "dark";
+  } else {
+    let body = document.getElementsByTagName("body");
+    body[0].style.backgroundImage = 'url("../img/clouds.jpg")';
+
+
+    let headers = document.getElementsByTagName("header");
+    headers[0].style.backgroundColor = "white";
+    headers[0].style.color = "black";
+
+    let sections = Array.from(document.getElementsByTagName("section"));
+
+    sections.map((section) => {
+      section.style.backgroundColor = "white";
+      section.style.color = "black";
+
+      return section;
+    });
+
+    let btn = document.getElementById("btnDark");
+    btn.innerHTML = "Dark mode";
+    Mode = "light";
+  }
 }
