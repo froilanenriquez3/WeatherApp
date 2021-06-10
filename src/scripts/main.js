@@ -1,5 +1,7 @@
 var Provinces = [];
 var Municipios = [];
+var FilteredProvinces = [];
+var FilteredMuns = [];
 var Mode = "light";
 
 init();
@@ -8,6 +10,10 @@ function init() {
   document
     .getElementById("btnAbc")
     .addEventListener("click", sortAlphabeticalProvinces);
+  document
+    .getElementById("btnAbcMun")
+    .addEventListener("click", sortAlphabeticalMun);
+
   document.getElementById("btnPdf").addEventListener("click", generatePdf);
 
   document
@@ -15,7 +21,9 @@ function init() {
     .addEventListener("click", searchProv);
   document.getElementById("btnSearchMun").addEventListener("click", searchMun);
 
-  document.getElementById("btnDark").addEventListener("click", turnOffTheLights);
+  document
+    .getElementById("btnDark")
+    .addEventListener("click", turnOffTheLights);
 
   getProvinces();
   getMunicipios();
@@ -48,7 +56,6 @@ function getMunicipios() {
       res.data.forEach((item) => {
         Municipios.push(item);
       });
-      // console.log(Municipios);
     })
     .catch((err) => {
       console.log(err);
@@ -63,15 +70,7 @@ function getProvinceInfo(codprov) {
   axios
     .get("https://www.el-tiempo.net/api/json/v2/provincias/" + codprov)
     .then((res) => {
-      // console.log(res);
-
       province = res.data;
-
-      /* if (Array.isArray(res.data)) {
-        province = res.data[0];
-      } else {
-        province = Object.keys(res.data)[0];
-      } */
     })
     .catch((err) => {
       console.log(err);
@@ -91,21 +90,9 @@ function getProvinceMunicipios(codprov) {
     )
     .then((res) => {
       // console.log(res);
-
       res.data.municipios.forEach((item) => {
         provMunicipios.push(item);
       });
-
-      //JSON returns both arrays and objects, checks to see which one response is
-      /*  if (Array.isArray(res.data.municipios)) {
-        res.data.municipios.forEach((item) => {
-          provMunicipios.push(item);
-        });
-      } else {
-        Object.values(res.data).forEach((item) => {
-          provMunicipios.push(item);
-        });
-      } */
     })
     .catch((err) => {
       console.log(err);
@@ -265,25 +252,36 @@ function sortAlphabeticalProvinces() {
   let ul = document.getElementById("provinceList");
   ul.innerHTML = "";
 
-  Provinces.sort((a, b) =>
-    a.NOMBRE_PROVINCIA.localeCompare(b.NOMBRE_PROVINCIA)
-  );
-
-  fillProvinceList(Provinces);
+  if (FilteredProvinces.length > 0) {
+    FilteredProvinces.sort((a, b) =>
+      a.NOMBRE_PROVINCIA.localeCompare(b.NOMBRE_PROVINCIA)
+    );
+    fillProvinceList(FilteredProvinces);
+  } else {
+    Provinces.sort((a, b) =>
+      a.NOMBRE_PROVINCIA.localeCompare(b.NOMBRE_PROVINCIA)
+    );
+    fillProvinceList(Provinces);
+  }
 }
 
-function sortAlphabeticalMun(municipios) {
+function sortAlphabeticalMun() {
   let ul = document.getElementById("provinceMunicipiosList");
   ul.innerHTML = "";
 
-  console.log("Sorting municipios");
+  if (FilteredMuns.length > 0) {
+    FilteredMuns.sort((a, b) =>
+      a.NOMBRE_PROVINCIA.localeCompare(b.NOMBRE_PROVINCIA)
+    );
 
-  municipios.sort((a, b) =>
-    a.NOMBRE_PROVINCIA.localeCompare(b.NOMBRE_PROVINCIA)
-  );
-  //  municipios.reverse();
+    fillMunList(FilteredMuns);
+  } else {
+    Municipios.sort((a, b) =>
+      a.NOMBRE_PROVINCIA.localeCompare(b.NOMBRE_PROVINCIA)
+    );
 
-  fillMunList(municipios);
+    fillMunList(Municipios);
+  }
 }
 
 function generatePdf() {
@@ -296,28 +294,29 @@ function generatePdf() {
 function searchProv() {
   let name = document.getElementById("searchBarProv").value;
 
-  let filteredProvs = Provinces.filter((province) =>
+  FilteredProvinces = Provinces.filter((province) =>
     province.NOMBRE_PROVINCIA.toLowerCase().includes(name.toLowerCase())
   );
 
-  fillProvinceList(filteredProvs);
+  fillProvinceList(FilteredProvinces);
 }
 
 function searchMun() {
+  let header = document.getElementById("munHeader");
+  header.innerHTML = "Cities";
   let name = document.getElementById("searchBarMun").value;
 
-  let filteredMuns = Municipios.filter((municipio) =>
+  FilteredMuns = Municipios.filter((municipio) =>
     municipio.NOMBRE.toLowerCase().includes(name.toLowerCase())
   );
 
-  fillMunList(filteredMuns);
+  fillMunList(FilteredMuns);
 }
 
 function turnOffTheLights() {
   if (Mode == "light") {
     let body = document.getElementsByTagName("body");
     body[0].style.backgroundImage = 'url("../img/night.jpg")';
-
 
     let headers = document.getElementsByTagName("header");
     headers[0].style.backgroundColor = "MidnightBlue";
@@ -338,7 +337,6 @@ function turnOffTheLights() {
   } else {
     let body = document.getElementsByTagName("body");
     body[0].style.backgroundImage = 'url("../img/clouds.jpg")';
-
 
     let headers = document.getElementsByTagName("header");
     headers[0].style.backgroundColor = "white";

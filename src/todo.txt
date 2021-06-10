@@ -1,16 +1,16 @@
 API: https://www.el-tiempo.net/api
 
-- choose province 
-- choose city in a province
-- search by city name
+- choose province x
+- choose city in a province x 
+- search by city name x
 - show weather forecast and basic data:
-    - of province
-    - of city
+    - of province x
+    - of city x
 - choose the order in which towns and provinces are listed
     - by city 
-    - alphabetically
-- dark mode 
-- generate pdf of the town with data (html2pdf)
+    - alphabetically x(provinces)
+- dark mode x
+- generate pdf of the town with data (html2pdf) x
 - extra (mb)
 
 Restrictions:
@@ -18,3 +18,9 @@ Restrictions:
 - no html tables
 - no inline styles
 - responsive design
+
+
+
+
+fix alphabetical so it filters current list:
+    add display arrays
