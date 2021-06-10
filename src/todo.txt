@@ -8,10 +8,10 @@ API: https://www.el-tiempo.net/api
     - of city x
 - choose the order in which towns and provinces are listed
     - by city 
-    - alphabetically x(provinces)
+    - alphabetically x
 - dark mode x
 - generate pdf of the town with data (html2pdf) x
-- extra (mb)
+- extra (mb) x
 
 Restrictions:
 - no server technology
@@ -19,8 +19,3 @@ Restrictions:
 - no inline styles
 - responsive design
 
-
-
-
-fix alphabetical so it filters current list:
-    add display arrays

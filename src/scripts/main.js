@@ -39,13 +39,11 @@ function getProvinces() {
       res.data.provincias.forEach((item) => {
         Provinces.push(item);
       });
+      fillProvinceList(Provinces);
     })
     .catch((err) => {
       console.log(err);
     })
-    .finally(() => {
-      fillProvinceList(Provinces);
-    });
 }
 
 function getMunicipios() {
@@ -56,13 +54,12 @@ function getMunicipios() {
       res.data.forEach((item) => {
         Municipios.push(item);
       });
+      fillMunList(Municipios);
     })
     .catch((err) => {
       console.log(err);
     })
-    .finally(() => {
-      fillMunList(Municipios);
-    });
+
 }
 
 function getProvinceInfo(codprov) {
@@ -70,14 +67,14 @@ function getProvinceInfo(codprov) {
   axios
     .get("https://www.el-tiempo.net/api/json/v2/provincias/" + codprov)
     .then((res) => {
-      province = res.data;
+      console.log(res);
+      province = res.data; 
+      seeInfoProvince(province);
     })
     .catch((err) => {
       console.log(err);
     })
-    .finally(() => {
-      seeInfoProvince(province);
-    });
+
 }
 
 function getProvinceMunicipios(codprov) {
@@ -90,16 +87,16 @@ function getProvinceMunicipios(codprov) {
     )
     .then((res) => {
       // console.log(res);
+      FilteredMuns = [];
       res.data.municipios.forEach((item) => {
-        provMunicipios.push(item);
+        FilteredMuns.push(item);
       });
+      seeMunicipiosProvince(FilteredMuns);
     })
     .catch((err) => {
       console.log(err);
     })
-    .finally(() => {
-      seeMunicipiosProvince(provMunicipios);
-    });
+
 }
 
 function getMunicipioInfo(codprov, id) {
@@ -114,14 +111,13 @@ function getMunicipioInfo(codprov, id) {
     )
     .then((res) => {
       // console.log(res.data);
-      municipio = res.data;
+      municipio = res.data;  
+      seeInfoMunicipio(municipio);
     })
     .catch((err) => {
       console.log(err);
     })
-    .finally(() => {
-      seeInfoMunicipio(municipio);
-    });
+
 }
 
 /* Functions */
@@ -188,6 +184,9 @@ function seeInfoMunicipio(municipio) {
   let header = document.getElementById("munHeader");
   header.innerHTML = municipio.municipio.NOMBRE;
 
+  let label = document.getElementById("mapLabel");
+  label.innerHTML = municipio.municipio.NOMBRE;
+
   document.getElementById("btnPdf").addEventListener("click", generatePdf);
 
   //Datos Municipio
@@ -202,7 +201,7 @@ function seeInfoMunicipio(municipio) {
 
   //Tiempo
   document.getElementById("munFecha").innerHTML = "Fecha: " + municipio.fecha;
-  document.getElementById("munSky").innerHTML = municipio.stateSky.description;
+  document.getElementById("munSky").innerHTML = "Estado: " + municipio.stateSky.description;
   document.getElementById("munTempActual").innerHTML =
     "Temperatura Actual: " + municipio.temperatura_actual;
   document.getElementById("munTempMax").innerHTML =
@@ -215,6 +214,11 @@ function seeInfoMunicipio(municipio) {
     "Viento: " + municipio.viento;
   document.getElementById("munLluvia").innerHTML =
     "Lluvia: " + municipio.lluvia;
+
+  addMark(
+    municipio.municipio.LONGITUD_ETRS89_REGCAN95,
+    municipio.municipio.LATITUD_ETRS89_REGCAN95
+  );
 }
 
 //Get request doesnt accept extra 0s
@@ -243,9 +247,9 @@ function seeInfoProvince(province) {
     province.provincia.COMUNIDAD_CIUDAD_AUTONOMA;
 
   //Tiempo
-  document.getElementById("provToday").innerHTML = "Today: " + province.today.p;
+  document.getElementById("provToday").innerHTML = "Hoy: " + province.today.p;
   document.getElementById("provTomorrow").innerHTML =
-    "Tomorrow: " + province.tomorrow.p;
+    "Mañana: " + province.tomorrow.p;
 }
 
 function sortAlphabeticalProvinces() {
@@ -302,7 +306,7 @@ function searchProv() {
 }
 
 function searchMun() {
-  let header = document.getElementById("munHeader");
+  let header = document.getElementById("provinceInfoHeader");
   header.innerHTML = "Cities";
   let name = document.getElementById("searchBarMun").value;
 

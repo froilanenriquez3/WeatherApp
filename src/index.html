@@ -5,10 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+
+    <!-- MapBox API -->
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <script src="https://api.mapbox.com/mapbox-gl-js/v1.4.1/mapbox-gl.js"></script>
+
+    <!-- AXIOS  -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
+
+    <!-- HTML2PDF -->
+    <script src="lib/html2pdf.bundle.min.js"></script>
+
     <title>Weather App</title>
   </head>
   <body>
-    <header >
+    <header>
       <h1>Froilan's Weather App</h1>
 
       <div>
@@ -17,7 +31,11 @@
     </header>
 
     <aside>
-      <section id="mapBox"></section>
+      <section id="mapContainer">
+        <h2 id="mapLabel"></h2>
+        <p>Click on a city to see it on the map</p>
+        <div id="mapBox"></div>
+      </section>
     </aside>
 
     <main>
@@ -49,8 +67,7 @@
           <p id="munResults"></p>
         </div>
 
-        <ul id="provinceMunicipiosList">
-        </ul>
+        <ul id="provinceMunicipiosList"></ul>
       </section>
 
       <section id="municipioInfo" class="mainSection">
@@ -59,6 +76,7 @@
           <h2 id="munHeader">Select a city to see info</h2>
 
           <article id="munDatos">
+            <h3>Datos de municipio</h3>
             <p id="munCapital"></p>
             <p id="munPoblacion"></p>
             <p id="munSuperficie"></p>
@@ -66,6 +84,7 @@
           </article>
 
           <article id="munTiempo">
+            <h3>Datos de tiempo</h3>
             <p id="munFecha"></p>
             <p id="munSky"></p>
             <p id="munTempActual"></p>
@@ -80,13 +99,15 @@
 
       <section id="provinceInfo" class="mainSection">
         <h2 id="provHeader">Info</h2>
-        <p>Select a province or city to see info</p>
+        <span>Select a province or city to see info</span>
         <article id="provDatos">
+          <h3>Datos de provincia</h3>
           <p id="provCapital"></p>
           <p id="provCom"></p>
         </article>
 
         <article id="provTiempo">
+          <h3>Datos de tiempo</h3>
           <p id="provToday"></p>
           <p id="provTomorrow"></p>
         </article>
@@ -95,12 +116,7 @@
 
     <footer></footer>
 
-    <!-- AXIOS  -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
-
-    <!-- HTML2PDF -->
-    <script src="lib/html2pdf.bundle.min.js"></script>
-
-    <script src="scripts/main.js" type="module"></script>
+    <script src="scripts/mapbox.js"></script>
+    <script src="scripts/main.js"></script>
   </body>
 </html>
