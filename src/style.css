@@ -42,7 +42,7 @@ header {
   justify-content: space-between;
   vertical-align: middle;
   padding: 1%;
-  padding-top: 1%;
+  padding-top: 1.5%;
   background-color: white;
   opacity: 0.9;
 }
@@ -194,12 +194,13 @@ ul {
   }
 
   #provinceInfo,
-  #muncipioInfo {
-    width:90vw;
+  #municipioInfo {
+    min-width:90vw;
+    max-width: 90vw;
   }
 
   #provinceListSection,
   #provinceMunicipios {
-    width: 90vw;
+    width: 70vw;
   }
 }
