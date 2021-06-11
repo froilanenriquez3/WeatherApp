@@ -47,6 +47,10 @@ header {
   opacity: 0.9;
 }
 
+li {
+  border-bottom: solid black 1px;
+}
+
 main {
   display: grid;
   grid-template-columns: 1fr 1fr 5fr;
