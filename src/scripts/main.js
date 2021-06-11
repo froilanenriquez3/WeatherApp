@@ -352,7 +352,7 @@ function searchMun() {
 function turnOffTheLights() {
   if (Mode == "light") {
     let body = document.getElementsByTagName("body");
-    body[0].style.backgroundImage = 'url("../img/night.jpg")';
+    body[0].style.backgroundImage = 'url("img/night.jpg")';
 
     let headers = document.getElementsByTagName("header");
     headers[0].style.backgroundColor = "MidnightBlue";
@@ -372,7 +372,7 @@ function turnOffTheLights() {
     Mode = "dark";
   } else {
     let body = document.getElementsByTagName("body");
-    body[0].style.backgroundImage = 'url("../img/clouds.jpg")';
+    body[0].style.backgroundImage = 'url("img/clouds.jpg")';
 
     let headers = document.getElementsByTagName("header");
     headers[0].style.backgroundColor = "white";
