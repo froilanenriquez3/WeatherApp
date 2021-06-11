@@ -52,8 +52,7 @@ li {
 }
 
 main {
-  display: grid;
-  grid-template-columns: 1fr 1fr 5fr;
+  display: flex;
   padding: 2%;
 }
 
@@ -139,6 +138,16 @@ ul {
   border-radius: 5px;
 }
 
+#provinceInfo,
+#muncipioInfo {
+  width: 50vw;
+}
+
+#provinceListSection,
+#provinceMunicipios {
+  width: 20vw;
+}
+
 #provinceList,
 #provinceMunicipiosList {
   height: 55vh;
@@ -172,4 +181,22 @@ ul {
 
 .sectionHeader > * {
   margin: 4px;
+}
+
+@media only screen and (max-width: 700px) {
+  main {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  #provinceInfo,
+  #muncipioInfo {
+    width: 100vw;
+  }
+
+  #provinceListSection,
+  #provinceMunicipios {
+    width: 40vw;
+  }
 }
