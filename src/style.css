@@ -139,12 +139,14 @@ ul {
 }
 
 #provinceInfo,
-#muncipioInfo {
-  width: 50vw;
+#municipioInfo {
+  max-width: 55vw; 
+  min-width: 55vw; 
 }
 
 #provinceListSection,
 #provinceMunicipios {
+  box-sizing: border-box;
   width: 20vw;
 }
 
@@ -188,15 +190,16 @@ ul {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    padding: 0%;
   }
 
   #provinceInfo,
   #muncipioInfo {
-    width: 100vw;
+    width:90vw;
   }
 
   #provinceListSection,
   #provinceMunicipios {
-    width: 40vw;
+    width: 90vw;
   }
 }

@@ -309,11 +309,11 @@ function sortPopulationMun() {
   ul.innerHTML = "";
 
   if (FilteredMuns.length > 0) {
-    FilteredMuns.sort((a, b) => a.POBLACION_MUNI - b.POBLACION_MUNI);
+    FilteredMuns.sort((a, b) => b.POBLACION_MUNI - a.POBLACION_MUNI);
 
     fillMunList(FilteredMuns);
   } else {
-    Municipios.sort((a, b) => a.POBLACION_MUNI - b.POBLACION_MUNI);
+    Municipios.sort((a, b) => b.POBLACION_MUNI - a.POBLACION_MUNI);
 
     fillMunList(Municipios);
   }
