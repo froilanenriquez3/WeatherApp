@@ -15,6 +15,7 @@ function init() {
     .addEventListener("click", sortAlphabeticalMun);
 
   // document.getElementById("btnPobProv").addEventListener("click", () => {});
+
   document
     .getElementById("btnPobMun")
     .addEventListener("click", sortPopulationMun);
@@ -29,6 +30,8 @@ function init() {
   document
     .getElementById("btnDark")
     .addEventListener("click", turnOffTheLights);
+
+  document.getElementById("closeError").addEventListener("click", closeError);
 
   getProvinces();
   getMunicipios();
@@ -47,7 +50,9 @@ function getProvinces() {
       fillProvinceList(Provinces);
     })
     .catch((err) => {
-      console.log(err);
+      // console.log(err);
+      document.getElementById("feedback").style.display = "flex";
+      setTimeout(closeError, 4000);
     });
 }
 
@@ -62,7 +67,9 @@ function getMunicipios() {
       fillMunList(Municipios);
     })
     .catch((err) => {
-      console.log(err);
+      // console.log(err);
+      document.getElementById("feedback").style.display = "flex";
+      setTimeout(closeError, 4000);
     });
 }
 
@@ -76,7 +83,9 @@ function getProvinceInfo(codprov) {
       seeInfoProvince(province);
     })
     .catch((err) => {
-      console.log(err);
+      // console.log(err);
+      document.getElementById("feedback").style.display = "flex";
+      setTimeout(closeError, 4000);
     });
 }
 
@@ -96,7 +105,9 @@ function getProvinceMunicipios(codprov) {
       seeMunicipiosProvince(FilteredMuns);
     })
     .catch((err) => {
-      console.log(err);
+      // console.log(err);
+      document.getElementById("feedback").style.display = "flex";
+      setTimeout(closeError, 4000);
     });
 }
 
@@ -116,7 +127,9 @@ function getMunicipioInfo(codprov, id) {
       seeInfoMunicipio(municipio);
     })
     .catch((err) => {
-      console.log(err);
+      // console.log(err);
+      document.getElementById("feedback").style.display = "flex";
+      setTimeout(closeError, 4000);
     });
 }
 
@@ -134,7 +147,6 @@ function fillProvinceList(provinces) {
     li.dataset.id = province.CODPROV;
 
     li.addEventListener("click", () => {
-      // seeMunicipiosProvince(province);
       document.getElementById("provinceInfo").style.display = "block";
       document.getElementById("municipioInfo").style.display = "none";
       getProvinceMunicipios(province.CODPROV);
@@ -183,9 +195,6 @@ function seeMunicipiosProvince(municipios) {
 function seeInfoMunicipio(municipio) {
   let header = document.getElementById("munHeader");
   header.innerHTML = municipio.municipio.NOMBRE;
-
-  // let label = document.getElementById("mapLabel");
-  // label.innerHTML = municipio.municipio.NOMBRE;
 
   document.getElementById("btnPdf").addEventListener("click", generatePdf);
 
@@ -273,15 +282,11 @@ function sortAlphabeticalMun() {
   console.log("sort alphabetical");
 
   if (FilteredMuns.length > 0) {
-    FilteredMuns.sort((a, b) =>
-      a.NOMBRE.localeCompare(b.NOMBRE)
-    );
+    FilteredMuns.sort((a, b) => a.NOMBRE.localeCompare(b.NOMBRE));
 
     fillMunList(FilteredMuns);
   } else {
-    Municipios.sort((a, b) =>
-      a.NOMBRE.localeCompare(b.NOMBRE)
-    );
+    Municipios.sort((a, b) => a.NOMBRE.localeCompare(b.NOMBRE));
 
     fillMunList(Municipios);
   }
@@ -386,4 +391,8 @@ function turnOffTheLights() {
     btn.innerHTML = "Dark mode";
     Mode = "light";
   }
+}
+
+function closeError() {
+  document.getElementById("feedback").style.display = "none";
 }

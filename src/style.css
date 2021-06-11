@@ -4,6 +4,13 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+aside {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  padding: 1%;
+}
+
 body {
   background-image: url("../img/clouds.jpg");
   background-repeat: no-repeat;
@@ -13,25 +20,24 @@ body {
 button {
   padding: 5px;
   margin-bottom: 5px;
-  background-color:gainsboro;
+  background-color: gainsboro;
   border-radius: 5px;
   border: none;
 }
 
 button:hover {
-  background-color:cornflowerblue;
+  background-color: cornflowerblue;
   color: white;
   cursor: pointer;
 }
 
-button:active{
-  background-color:rgb(152, 180, 233);
+button:active {
+  background-color: rgb(152, 180, 233);
   color: white;
 }
 
 header {
   box-sizing: border-box;
-  /* height: 10vh; */
   display: flex;
   justify-content: space-between;
   vertical-align: middle;
@@ -39,14 +45,6 @@ header {
   padding-top: 1%;
   background-color: white;
   opacity: 0.9;
-}
-
-aside {
-  box-sizing: border-box;
-  /* height: 20vh; */
-  display: flex;
-  justify-content: center;
-  padding: 1%;
 }
 
 main {
@@ -66,6 +64,28 @@ ul {
 
 #btnPdf {
   float: right;
+}
+
+#error {
+  text-align: center;
+  background-color: red;
+  color: white;
+  opacity: 0.8;
+  width: 30vh;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 1%;
+}
+
+#error > button {
+  background-color: red;
+  color: white;
+}
+
+#feedback {
+  display: none;
+  justify-content: center;
+  width: 100%;
 }
 
 #mapBox {
@@ -101,7 +121,6 @@ ul {
 }
 
 #provinceInfo p {
-  font-size: 1.2em;
   margin: 2%;
   line-height: 23pt;
 }
@@ -112,7 +131,6 @@ ul {
 #munTiempo {
   border: solid black 1px;
   margin: 2%;
-  /* min-height: 20vh; */
   padding: 1%;
   border-radius: 5px;
 }
@@ -126,16 +144,15 @@ ul {
 #provinceList > li:hover,
 #provinceMunicipiosList > li:hover {
   color: white;
-  background-color: blue;
+  background-color: cornflowerblue;
+  cursor: pointer;
 }
 
 .mainSection {
   max-height: 100%;
   box-sizing: border-box;
   border-radius: 5px;
-  /* background-color: white; */
   margin: 5px;
-  /* opacity: 0.9; */
   padding: 1em;
 }
 
