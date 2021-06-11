@@ -366,7 +366,7 @@ function turnOffTheLights() {
       return section;
     });
 
-    let btn = document.getElementById("btnDark");
+    let btn = document.getElementById("btnDarkText");
     btn.innerHTML = "Light mode";
     Mode = "dark";
   } else {
@@ -386,7 +386,7 @@ function turnOffTheLights() {
       return section;
     });
 
-    let btn = document.getElementById("btnDark");
+    let btn = document.getElementById("btnDarkText");
     btn.innerHTML = "Dark mode";
     Mode = "light";
   }
