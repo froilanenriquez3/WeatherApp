@@ -279,7 +279,6 @@ function sortAlphabeticalProvinces() {
 function sortAlphabeticalMun() {
   let ul = document.getElementById("provinceMunicipiosList");
   ul.innerHTML = "";
-  console.log("sort alphabetical");
 
   if (FilteredMuns.length > 0) {
     FilteredMuns.sort((a, b) => a.NOMBRE.localeCompare(b.NOMBRE));
