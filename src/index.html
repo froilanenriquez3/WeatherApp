@@ -19,6 +19,14 @@
     <!-- HTML2PDF -->
     <script src="lib/html2pdf.bundle.min.js"></script>
 
+    <!-- FontAwesome -->
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+
     <title>Weather App</title>
   </head>
   <body>
@@ -30,23 +38,17 @@
       </div>
     </header>
 
-    <aside>
-      <section id="mapContainer">
-        <h2 id="mapLabel"></h2>
-        <p>Click on a city to see it on the map</p>
-        <div id="mapBox"></div>
-      </section>
-    </aside>
-
     <main>
       <section class="mainSection">
         <div class="sectionHeader">
-          <h2>Provinces</h2>
-          <button id="btnAbc">Alphabetical</button>
-          <button>Poblacio</button>
+          <h2>Provincias</h2>
+          <button id="btnAbc">ABC</button>
+          <!-- <button id="btnPobProv">Población</button> -->
           <div id="searchProv">
-            <button id="btnSearchProv">Search All</button>
-            <input type="text" id="searchBarProv" />
+            <button id="btnSearchProv">
+              <i class="fas fa-search"></i>
+            </button>
+            <input type="text" id="searchBarProv" class="searchBar" />
           </div>
           <p id="provResults"></p>
         </div>
@@ -56,13 +58,15 @@
 
       <section id="provinceMunicipios" class="mainSection">
         <div class="sectionHeader">
-          <h2 id="provinceInfoHeader">Cities</h2>
-          <button id="btnAbcMun">Alphabetical</button>
-          <button>Poblacio</button>
+          <h2 id="provinceInfoHeader">Municipios</h2>
+          <button id="btnAbcMun">ABC</button>
+          <button id="btnPobMun">Población</button>
 
           <div id="searchMun">
-            <button id="btnSearchMun">Search All</button>
-            <input type="text" id="searchBarMun" />
+            <button id="btnSearchMun">
+              <i class="fas fa-search"></i>
+            </button>
+            <input type="text" id="searchBarMun" class="searchBar" />
           </div>
           <p id="munResults"></p>
         </div>
@@ -71,35 +75,47 @@
       </section>
 
       <section id="municipioInfo" class="mainSection">
-        <button id="btnPdf">Download PDF</button>
+        <button id="btnPdf">Descargar PDF</button>
         <div id="munDiv">
-          <h2 id="munHeader">Select a city to see info</h2>
+          <h2 id="munHeader">Seleccione una municipio</h2>
 
           <article id="munDatos">
             <h3>Datos de municipio</h3>
-            <p id="munCapital"></p>
-            <p id="munPoblacion"></p>
-            <p id="munSuperficie"></p>
-            <p id="munPerimetro"></p>
+            <div id="munDatosTop">
+              <p id="munCapital"></p>
+              <p id="munPoblacion"></p>
+              <p id="munSuperficie"></p>
+              <p id="munPerimetro"></p>
+            </div>
           </article>
 
           <article id="munTiempo">
             <h3>Datos de tiempo</h3>
-            <p id="munFecha"></p>
-            <p id="munSky"></p>
-            <p id="munTempActual"></p>
-            <p id="munTempMin"></p>
-            <p id="munTempMax"></p>
-            <p id="munHumedad"></p>
-            <p id="munViento"></p>
-            <p id="munLluvia"></p>
+
+            <div id="munTiempoTop">
+              <p id="munFecha"></p>
+              <p id="munSky"></p>
+              <p id="munTempActual"></p>
+              <p id="munTempMin"></p>
+              <p id="munTempMax"></p>
+              <p id="munHumedad"></p>
+              <p id="munViento"></p>
+              <p id="munLluvia"></p>
+            </div>
+          </article>
+
+          <article id="mapContainerContainer">
+            <div id="mapContainer">
+              <h2 id="mapLabel"></h2>
+              <div id="mapBox"></div>
+            </div>
           </article>
         </div>
       </section>
 
       <section id="provinceInfo" class="mainSection">
         <h2 id="provHeader">Info</h2>
-        <span>Select a province or city to see info</span>
+        <span>Selecciona una provincia o municipio</span>
         <article id="provDatos">
           <h3>Datos de provincia</h3>
           <p id="provCapital"></p>

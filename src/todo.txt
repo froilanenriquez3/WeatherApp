@@ -7,7 +7,7 @@ API: https://www.el-tiempo.net/api
     - of province x
     - of city x
 - choose the order in which towns and provinces are listed
-    - by city 
+    - by population 
     - alphabetically x
 - dark mode x
 - generate pdf of the town with data (html2pdf) x

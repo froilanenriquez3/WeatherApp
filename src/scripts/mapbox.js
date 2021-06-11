@@ -14,7 +14,7 @@ function initMap(idDiv) {
     zoom: 7, // starting zoom
   });
   map.markers = [];
-  map.on("load", function () {
+  map.on("idle", function () {
     map.resize();
   });
 
@@ -25,10 +25,7 @@ function initMap(idDiv) {
 //Add a marker to the map, given the longitude and latitude of the address.
 const addMark = (lat, lng, map = MyMap) => {
   let mark = new mapboxgl.Marker().setLngLat([lat, lng]).addTo(map);
-
-  map.on("load", function () {
-    map.resize();
-  });
+  map.resize();
 
   removeAllMarks(map);
   map.markers.push(mark);
